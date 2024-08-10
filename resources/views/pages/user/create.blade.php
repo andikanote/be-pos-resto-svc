@@ -16,7 +16,7 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Form User</h1>
+                <h1>Form Add User</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Forms</a></div>
@@ -33,21 +33,25 @@
                     <form action="{{ route('user.store') }}" method="POST">
                         @csrf
                         <div class="card-header">
-                            <h4>Input Text</h4>
+                            <h4>Form Add User</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label>Name</label>
                                 <input type="text"
-                                    class="form-control @error('name')
-                                is-invalid
-                            @enderror"
-                                    name="name">
+                                       class="form-control @error('name') is-invalid @enderror"
+                                       name="name"
+                                       required> <!-- add required attribute to make the field mandatory -->
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
+                                @if($errors->has('name') && $request->input('name') === null)
+                                    <div class="invalid-feedback" required>
+                                        Please enter your name.
+                                    </div>
+                                @endif
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
@@ -55,7 +59,8 @@
                                     class="form-control @error('email')
                                 is-invalid
                             @enderror"
-                                    name="email">
+                                    name="email"
+                                    required>
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -85,7 +90,7 @@
                             <div class="form-group">
                                 <label>Phone</label>
                                 <input type="number"
-                                    class="form-control" name="phone">
+                                    class="form-control" name="phone" required>
                             </div>
 
                             <div class="form-group">
