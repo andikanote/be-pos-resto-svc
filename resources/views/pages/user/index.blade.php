@@ -13,7 +13,7 @@
             <div class="section-header">
                 <h1>Users</h1>
                 <div class="section-header-button">
-                    <a href="" class="btn btn-primary">Add New</a>
+                    <a href="{{ route('user.create') }}" class="btn btn-primary">Add New</a>
                 </div>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
@@ -81,10 +81,10 @@
                                                     {{ $user->email }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->roles }}
+                                                    {{ $user->phone }}
                                                 </td>
                                                 <td>
-                                                    {{ $user->phone }}
+                                                    {{ $user->roles }}
                                                 </td>
                                                 <td>{{ $user->created_at }}</td>
                                                 <td>
