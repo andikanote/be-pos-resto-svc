@@ -20,8 +20,9 @@ Route::get('/', function () {
 });
 
 Route::middleware(['auth'])->group(function () {
-    Route::get('home', function () {
+    Route::get('/', function () {
         return view('pages.dashboard');
-    })->name('home');
+    })->name('/');
+    Route::get('/', 'App\Http\Controllers\DashboardController@index')->name('pages.dashboard');
     Route::resource('user', UserController::class);
 });
