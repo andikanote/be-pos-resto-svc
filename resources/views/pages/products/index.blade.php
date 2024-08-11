@@ -56,7 +56,7 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-
+                                            {{-- <th>Image</th> --}}
                                             <th>Name</th>
                                             <th>Category</th>
                                             <th>Price</th>
@@ -67,7 +67,9 @@
                                         </tr>
                                         @foreach ($products as $product)
                                             <tr>
-
+                                                {{-- <td>
+                                                    {{ $product->image }}
+                                                </td> --}}
                                                 <td>
                                                     {{ $product->name }}
                                                 </td>
