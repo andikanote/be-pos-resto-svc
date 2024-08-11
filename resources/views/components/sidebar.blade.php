@@ -25,7 +25,36 @@
                     <li>
                         <a class="nav-link" href="{{ route('user.index') }}">List Users</a>
                     </li>
-
+                    <li>
+                        <a class="nav-link" href="{{ route('user.create') }}">Add Users</a>
+                    </li>
                 </ul>
             </li>
+        </li>
+        <li class="menu-header">Management Products</li>
+            <li class="nav-item dropdown">
+                <a href="#" class="nav-link has-dropdown"><i class="fas fa-user"></i><span>Products</span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="{{ route('products.index') }}">List Products</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Add Products</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a href="#"
+                    class="nav-link has-dropdown"><i class="far fa-file-alt"></i> <span>Category</span></a>
+                <ul class="dropdown-menu">
+                    <li>
+                        <a class="nav-link" href="{{ route('category.index') }}">List Category</a>
+                    </li>
+                    <li>
+                        <a class="nav-link" href="">Add Category</a>
+                    </li>
+                </ul>
+            </li>
+        </li>
+    </aside>
 </div>
