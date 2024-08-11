@@ -51,7 +51,7 @@
                         <a class="nav-link" href="{{ route('category.index') }}">List Category</a>
                     </li>
                     <li>
-                        <a class="nav-link" href="">Add Category</a>
+                        <a class="nav-link" href="{{ route('category.create')}}">Add Category</a>
                     </li>
                 </ul>
             </li>

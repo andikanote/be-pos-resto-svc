@@ -25,4 +25,59 @@ class CategoryController extends Controller
         $category = Category::find($id);
         return view('pages.category.show', compact('category'));
     }
+
+    // Create
+    public function create()
+    {
+        return view('pages.category.create');
+    }
+
+    // Store
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        // Store the request
+        $category = new Category();
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
+
+        return redirect()->route('category.index')->with('success', 'Category Create Successfully');
+    }
+
+    // Edit
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('pages.category.edit', compact('category'));
+    }
+
+    // Update
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required',
+            'description' => 'required',
+        ]);
+
+        // Update the request
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->description = $request->description;
+        $category->save();
+
+        return redirect()->route('category.index')->with('success', 'Category Update Successfully');
+    }
+
+    // Delete
+    public function destroy($id)
+    {
+        $category = Category::find($id);
+        $category->delete();
+        return redirect()->route('category.index')->with('success', 'Category Delete Successfully');
+    }
 }
