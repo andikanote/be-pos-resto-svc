@@ -69,7 +69,9 @@ class ProductController extends Controller
     // Edit
     public function edit($id)
     {
-        return view('pages.products.edit');
+        $product = Product::findOrFail($id);
+        $categories = DB::table('categories')->get();
+        return view('pages.products.edit', compact('product','categories'));
     }
 
     // Update
@@ -79,19 +81,33 @@ class ProductController extends Controller
             'name' => 'required',
             'description' => 'required',
             'price' => 'required|numeric',
-            'category_id' => 'required|exists:category_id',
+            'category_id' => 'required',
+            'stock' => 'required|numeric',
+            'status' => 'required|boolean',
+            'is_favorite' => 'required|boolean',
 
         ]);
 
         // Update the request
-        // $product = Product::find($id);
-        // $product->name = $request->name;
-        // $product->description = $request->description;
-        // $product->price = $request->price;
-        // $product->category_id = $request->category_id;
-        // $product->save();
+        $product = Product::find($id);
+        $product->name = $request->name;
+        $product->description = $request->description;
+        $product->price = $request->price;
+        $product->category_id = $request->category_id;
+        $product->stock = $request->stock;
+        $product->status = $request->status;
+        $product->is_favorite = $request->is_favorite;
+        $product->save();
 
-        return redirect()->route('products.index')->with('Success', 'Product Update Successfully');
+        //Save Image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image->storeAs('public/products', $product->id . '.' . $image->getClientOriginalExtension());
+            $product->image = 'storage/products/' . $product->id . '.' . $image->getClientOriginalExtension();
+            $product->save();
+        }
+
+        return redirect()->route('products.index')->with('success', 'Product Update Successfully');
     }
 
     // Destroy
@@ -100,5 +116,8 @@ class ProductController extends Controller
         // delete the request
         $product = Product::find($id);
         $product->delete();
+
+        return redirect()->route('products.index')->with('success', 'Product deleted Successfully');
+
     }
 }

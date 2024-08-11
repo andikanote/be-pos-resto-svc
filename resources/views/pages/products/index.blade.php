@@ -77,7 +77,7 @@
                                                     {{ $product->category->name }}
                                                 </td>
                                                 <td>
-                                                    {{ $product->price }}
+                                                    {{ formatRupiah($product->price) }}
                                                 </td>
                                                 <td>
                                                     {{ $product->status == 1 ? 'Active' : 'Inactive' }}
