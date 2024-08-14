@@ -38,6 +38,7 @@ class CategoryController extends Controller
         $request->validate([
             'name' => 'required',
             'description' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         // Store the request
@@ -46,7 +47,15 @@ class CategoryController extends Controller
         $category->description = $request->description;
         $category->save();
 
-        return redirect()->route('category.index')->with('success', 'Category Create Successfully');
+        //Save Image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image->storeAs('public/category', $category->id . '.' . $image->getClientOriginalExtension());
+            $category->image = 'storage/category/' . $category->id . '.' . $image->getClientOriginalExtension();
+            $category->save();
+        }
+
+        return redirect()->route('category.index')->with('success', 'Product Create Successfully');
     }
 
     // Edit
@@ -70,14 +79,22 @@ class CategoryController extends Controller
         $category->description = $request->description;
         $category->save();
 
-        return redirect()->route('category.index')->with('success', 'Category Update Successfully');
+        //Save Image
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $image->storeAs('public/category', $category->id . '.' . $image->getClientOriginalExtension());
+            $category->image = 'storage/category/' . $category->id . '.' . $image->getClientOriginalExtension();
+            $category->save();
+        }
+
+        return redirect()->route('category.index')->with('success', 'Product Update Successfully');
     }
 
-    // Delete
-    public function destroy($id)
-    {
-        $category = Category::find($id);
-        $category->delete();
-        return redirect()->route('category.index')->with('success', 'Category Delete Successfully');
-    }
+    // // Delete
+    // public function destroy($id)
+    // {
+    //     $category = Category::find($id);
+    //     $category->delete();
+    //     return redirect()->route('category.index')->with('success', 'Category Delete Successfully');
+    // }
 }

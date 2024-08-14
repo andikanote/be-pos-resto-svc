@@ -56,63 +56,65 @@
                                 <div class="table-responsive">
                                     <table class="table-striped table">
                                         <tr>
-                                            {{-- <th>Image</th> --}}
-                                            <th>Name</th>
-                                            <th>Category</th>
-                                            <th>Price</th>
-                                            <th>Status</th>
-                                            <th>Is Favorite</th>
-                                            <th>Created at</th>
-                                            <th>Action</th>
+                                          <th style="text-align: center;">Image</th>
+                                          <th style="text-align: center;">Name</th>
+                                          <th style="text-align: center;">Category</th>
+                                          <th style="text-align: center;">Price</th>
+                                          <th style="text-align: center;">Status</th>
+                                          <th style="text-align: center;">Favorite</th>
+                                          <th style="text-align: center;">Created at</th>
+                                          <th style="text-align: center;">Action</th>
                                         </tr>
-                                        @foreach ($products as $product)
+                                        @if(count($products) > 0)
+                                          @foreach ($products as $product)
                                             <tr>
-                                                {{-- <td>
-                                                    {{ $product->image }}
-                                                </td> --}}
-                                                <td>
-                                                    {{ $product->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $product->category->name }}
-                                                </td>
-                                                <td>
-                                                    {{ formatRupiah($product->price) }}
-                                                </td>
-                                                <td>
-                                                    {{ $product->status == 1 ? 'Active' : 'Inactive' }}
-                                                </td>
-                                                <td>
-                                                    {{ $product->is_favorite == 1 ? 'Yes' : 'No' }}
-                                                </td>
-                                                <td>
-                                                    {{ $product->created_at }}
+                                              <td style="display: flex; justify-content: center; align-items: center;">
+                                                <a href="{{ asset($product->image) }}" target="_blank" class="image-link">
+                                                  <img src="{{ asset($product->image) }}" alt="Category Image" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
+                                                </a>
+                                              </td>
+                                              <td style="text-align: center;">{{ $product->name }}</td>
+                                              <td style="display: flex; justify-content: center; align-items: center;">
+                                                <a href="{{ asset($product->category->image) }}" target="_blank" class="image-link">
+                                                  <img src="{{ asset($product->category->image) }}" alt="Product Image" style="width: 30px; height: 30px; border-radius: 10px; object-fit: cover;">
+                                                </a>
+                                                <span style="margin-left: 10px;">{{ $product->category->name }}</span>
+                                              </td>
+                                              <td style="text-align: center;">Rp. {{ number_format($product->price, 0, ',', '.') }}</td>
+                                              <td style="text-align: center;">
+                                                <span style="{{ $product->status == 1 ? 'color: green; font-weight: bold' : 'color: red; font-weight: bold' }}">{{ $product->status == 1 ? 'Active' : 'Inactive' }}</span>
+                                              </td>
+                                              <td style="text-align: center;">
+                                                <span style="{{ $product->is_favorite == 1 ? 'color: blue; font-weight: bold' : 'color: orange; font-weight: bold' }}">{{ $product->is_favorite == 1 ? 'Yes' : 'No' }}</span>
+                                              </td>
+                                              <td style="text-align: center;">{{ $product->created_at }}</td>
+                                              <td style="text-align: center;">
+                                                <div class="d-flex justify-content-center">
+                                                  <a href='{{ route('products.edit', $product->id) }}'
+                                                    class="btn btn-sm btn-info btn-icon">
+                                                    <i class="fas fa-edit"></i>
+                                                    Edit
+                                                  </a>
 
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('products.edit', $product->id) }}'
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
-
-                                                        <form action="{{ route('products.destroy', $product->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}" />
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
+                                                  <form action="{{ route('products.destroy', $product->id) }}"
+                                                    method="POST" class="ml-2">
+                                                    <input type="hidden" name="_method" value="DELETE" />
+                                                    <input type="hidden" name="_token"
+                                                      value="{{ csrf_token() }}" />
+                                                    <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                      <i class="fas fa-times"></i> Delete
+                                                    </button>
+                                                  </form>
+                                                </div>
+                                              </td>
                                             </tr>
-                                        @endforeach
-
-
-                                    </table>
+                                          @endforeach
+                                        @else
+                                          <tr>
+                                            <td colspan="8" style="text-align: center;">Data product kosong</td>
+                                          </tr>
+                                        @endif
+                                      </table>
                                 </div>
                                 <div class="float-right">
                                     {{ $products->withQueryString()->links() }}

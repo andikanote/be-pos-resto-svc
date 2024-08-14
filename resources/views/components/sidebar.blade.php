@@ -4,7 +4,7 @@
             <a href="{{ route('pages.dashboard') }}">UNIQUE COFFE</a>
         </div>
         <div class="sidebar-brand sidebar-brand-sm">
-            <a href="index.html">UC</a>
+            <a href="{{ route('pages.dashboard') }}">UC</a>
         </div>
         <ul class="sidebar-menu">
             <li class="menu-header">Dashboard</li>

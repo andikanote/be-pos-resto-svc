@@ -70,6 +70,14 @@
                                 @endif
                             </div>
 
+                            <div class="form-group">
+                                <label class="form-label">Photo products</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" name="image"
+                                        @error('image') is-invalid @enderror>
+                                </div>
+                            </div>
+
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary">Submit</button>

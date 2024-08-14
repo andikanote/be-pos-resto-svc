@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Add User')
+@section('title', 'Products Create')
 
 @push('style')
     <!-- CSS Libraries -->
@@ -16,71 +16,73 @@
     <div class="main-content">
         <section class="section">
             <div class="section-header">
-                <h1>Form Add User</h1>
+                <h1>Form Add Products</h1>
                 <div class="section-header-breadcrumb">
                     <div class="breadcrumb-item active"><a href="#">Dashboard</a></div>
                     <div class="breadcrumb-item"><a href="#">Forms</a></div>
-                    <div class="breadcrumb-item"> Add Users</div>
+                    <div class="breadcrumb-item">Add Products</div>
                 </div>
             </div>
 
             <div class="section-body">
-                <h2 class="section-title">Users</h2>
-
-
+                <h2 class="section-title">Products</h2>
 
                 <div class="card">
-                    <form action="{{ route('category.store') }}" method="POST">
+                    <form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         <div class="card-header">
-                            <h4>Form Add User</h4>
+                            <h4>Form Input Products</h4>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label>Name</label>
+                                <label>Name Products</label>
                                 <input type="text"
-                                       class="form-control @error('name') is-invalid @enderror"
-                                       name="name"
-                                       required> <!-- add required attribute to make the field mandatory -->
+                                    class="form-control @error('name')
+                                is-invalid
+                            @enderror"
+                                    name="name">
                                 @error('name')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                @if($errors->has('name') && $request->input('name') === null)
-                                    <div class="invalid-feedback" required>
-                                        Please enter your name.
-                                    </div>
-                                @endif
                             </div>
                             <div class="form-group">
-                                <label>Description</label>
+                                <label>Description Products</label>
                                 <input type="text"
-                                       class="form-control @error('description') is-invalid @enderror"
-                                       name="description"
-                                       required> <!-- add required attribute to make the field mandatory -->
+                                    class="form-control @error('description')
+                                is-invalid
+                            @enderror"
+                                    name="description">
                                 @error('description')
                                     <div class="invalid-feedback">
                                         {{ $message }}
                                     </div>
                                 @enderror
-                                @if($errors->has('description') && $request->input('description') === null)
-                                    <div class="invalid-feedback" required>
-                                        Please enter your name.
-                                    </div>
-                                @endif
                             </div>
 
+                            <div class="form-group">
+                                <label class="form-label">Photo products</label>
+                                <div class="col-sm-9">
+                                    <input type="file" class="form-control" name="image"
+                                        @error('image') is-invalid @enderror>
+                                </div>
+                                @error('image')
+                                    <div class="invalid-feedback">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="card-footer text-right">
                             <button class="btn btn-primary">Submit</button>
                         </div>
                     </form>
                 </div>
-
             </div>
-        </section>
-    </div>
+        </div>
+    </section>
+</div>
 @endsection
 
 @push('scripts')

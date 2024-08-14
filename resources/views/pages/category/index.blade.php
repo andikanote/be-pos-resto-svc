@@ -55,50 +55,52 @@
 
                                 <div class="table-responsive">
                                     <table class="table-striped table">
-                                        <tr>
-                                            <th>Name</th>
-                                            <th>Descripton</th>
-                                            <th>Image</th>
-                                            <th>Created at</th>
-                                            <th>Action</th>
-                                        </tr>
+                                      <tr>
+                                        <th style="text-align: center;">Name</th>
+                                        <th style="text-align: center;">Descripton</th>
+                                        <th style="text-align: center;">Image</th>
+                                        <th style="text-align: center;">Created at</th>
+                                        <th style="text-align: center;">Action</th>
+                                      </tr>
+                                      @if(count($categories) > 0)
                                         @foreach ($categories as $category)
-                                            <tr>
-                                                <td>
-                                                    {{ $category->name }}
-                                                </td>
-                                                <td>
-                                                    {{ $category->description }}
-                                                </td>
-                                                <td>
-                                                    {{ $category->image }}
-                                                </td>
-                                                <td>
-                                                    {{ $category->created_at }}
-                                                </td>
-                                                <td>
-                                                    <div class="d-flex justify-content-center">
-                                                        <a href='{{ route('category.edit', $category->id) }}'
-                                                            class="btn btn-sm btn-info btn-icon">
-                                                            <i class="fas fa-edit"></i>
-                                                            Edit
-                                                        </a>
+                                          <tr>
+                                            <td style="text-align: center;">{{ $category->name }}</td>
+                                            <td style="text-align: center;">{{ $category->description }}</td>
+                                            <td style="display: flex; justify-content: center; align-items: center;">
+                                              <a href="{{ asset($category->image) }}" target="_blank" class="image-link">
+                                                <img src="{{ asset($category->image) }}" alt="Category Image" style="width: 50px; height: 50px; border-radius: 10px; object-fit: cover;">
+                                              </a>
+                                            </td>
+                                            <td style="text-align: center;">{{ $category->created_at }}</td>
+                                            <td style="text-align: center;">
+                                              <div class="d-flex justify-content-center">
+                                                <a href='{{ route('category.edit', $category->id) }}'
+                                                  class="btn btn-sm btn-info btn-icon">
+                                                  <i class="fas fa-edit"></i>
+                                                  Edit
+                                                </a>
 
-                                                        <form action="{{ route('category.destroy', $category->id) }}"
-                                                            method="POST" class="ml-2">
-                                                            <input type="hidden" name="_method" value="DELETE" />
-                                                            <input type="hidden" name="_token"
-                                                                value="{{ csrf_token() }}" />
-                                                            <button class="btn btn-sm btn-danger btn-icon confirm-delete">
-                                                                <i class="fas fa-times"></i> Delete
-                                                            </button>
-                                                        </form>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                                <form action="{{ route('category.destroy', $category->id) }}"
+                                                  method="POST" class="ml-2">
+                                                  <input type="hidden" name="_method" value="DELETE" />
+                                                  <input type="hidden" name="_token"
+                                                    value="{{ csrf_token() }}" />
+                                                  <button class="btn btn-sm btn-danger btn-icon confirm-delete">
+                                                    <i class="fas fa-times"></i> Delete
+                                                  </button>
+                                                </form>
+                                              </div>
+                                            </td>
+                                          </tr>
                                         @endforeach
+                                      @else
+                                        <tr>
+                                          <td colspan="5" style="text-align: center;">Data category kosong</td>
+                                        </tr>
+                                      @endif
                                     </table>
-                                </div>
+                                  </div>
                                 <div class="float-right">
                                     {{ $categories->withQueryString()->links() }}
                                 </div>
