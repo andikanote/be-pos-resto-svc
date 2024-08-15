@@ -97,17 +97,17 @@
                                 <label class="form-label">Permission</label>
                                 <div class="selectgroup w-100">
                                     <label class="selectgroup-item">
-                                        <input type="radio" name="roles" value="Admin" class="selectgroup-input"
+                                        <input type="radio" name="roles" value="superadmin" class="selectgroup-input"
                                             checked="">
                                         <span class="selectgroup-button">Admin</span>
                                     </label>
                                     <label class="selectgroup-item">
-                                        <input type="radio" name="roles" value="Staff" class="selectgroup-input">
+                                        <input type="radio" name="roles" value="staff" class="selectgroup-input">
                                         <span class="selectgroup-button">Staff</span>
                                     </label>
                                     <label class="selectgroup-item">
-                                        <input type="radio" name="roles" value="User" class="selectgroup-input">
-                                        <span class="selectgroup-button">User</span>
+                                        <input type="radio" name="roles" value="crew" class="selectgroup-input">
+                                        <span class="selectgroup-button">Crew</span>
                                     </label>
 
                                 </div>
